@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常州鼎武医院2024年度体检服务</title>
+    <style>
+        :root {
+            --primary: #1a5fb4;
+            --secondary: #26a69a;
+            --accent: #fbc02d;
+            --light: #f5f9fc;
+            --dark: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', '微软雅黑', 'PingFang SC', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f9fc 0%, #e1f0ff 100%);
+            color: var(--dark);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 90, 180, 0.15);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        /* 新增：装饰性医疗图标背景 */
+        .medical-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="%231a5fb410" stroke-width="2"><path d="M20,50 L80,50 M50,20 L50,80 M30,30 L70,70 M30,70 L70,30"/></svg>');
+            background-size: 150px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d4a9e 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 新增：装饰性波浪效果 */
+        .wave-decoration {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="white" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+        
+        .hospital-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hospital-logo img {
+            max-width: 70px;
+            max-height: 70px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .content-area {
+            padding: 40px;
+        }
+        
+        /* 新增：时间线式下载卡片 */
+        .download-section {
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .download-section::before {
+            content: "";
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .download-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* 新增：步骤指示器 */
+        .step-indicator {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(26, 95, 180, 0.3);
+        }
+        
+        .file-info {
+            flex-grow: 1;
+        }
+        
+        .file-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .file-title i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .file-desc {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .file-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        
+        .file-meta span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .file-meta i {
+            margin-right: 5px;
+            font-size: 1rem;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(26, 95, 180, 0.3);
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 95, 180, 0.4);
+        }
+        
+        .download-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .download-btn:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* 新增：重要通知区域 */
+        .notice-board {
+            background: #fff9e6;
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 40px 0;
+            display: flex;
+        }
+        
+        .notice-icon {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .notice-content h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .notice-content ul {
+            padding-left: 20px;
+            color: #666;
+        }
+        
+        .notice-content li {
+            margin-bottom: 8px;
+        }
+        
+        /* 新增：联系卡片 */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s;
+            border-top: 3px solid var(--primary);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 15px;
+        }
+        
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .contact-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .contact-link {
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .contact-link i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-link:hover i {
+            transform: translateX(3px);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* 新增：浮动帮助按钮 */
+        .help-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .help-button:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                border-radius: 10px;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content-area {
+                padding: 30px 20px;
+            }
+            
+            .download-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .step-indicator {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .download-btn {
+                margin-left: 0;
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- 使用Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="medical-pattern"></div>
+        
+        <header>
+            <div class="hospital-logo">
+                <!-- 替换为实际logo -->
+                <i class="fas fa-hospital-alt" style="font-size: 3rem; color: var(--primary);"></i>
+            </div>
+            <h1>常州鼎武医院2024年度体检服务</h1>
+            <p class="subtitle">专业体检服务 · 健康管理专家 · 关爱您的健康</p>
+            <div class="wave-decoration"></div>
+        </header>
+        
+        <div class="content-area">
+            <!-- 通知公告 -->
+            <div class="notice-board">
+                <div class="notice-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="notice-content">
+                    <h3><i class="fas fa-bell"></i> 重要通知</h3>
+                    <ul>
+                        <li>体检时间：2024年3月1日至6月30日（周一至周六上午）</li>
+                        <li>请提前3个工作日预约，携带身份证原件</li>
+                        <li>体检前晚8点后禁食，早晨空腹</li>
+                        <li>女性避开生理期，孕妇不宜做放射检查</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 下载区域 -->
+            <h2 style="color: var(--primary); margin-bottom: 30px; display: flex; align-items: center;">
+                <i class="fas fa-file-download" style="margin-right: 10px;"></i> 体检文件下载
+            </h2>
+            
+            <div class="download-section">
+                <!-- 文件1 -->
+                <div class="download-card">
+                    <div class="step-indicator">1</div>
+                    <div class="file-info">
+                        <div class="file-title">
+                            <i class="fas fa-file-medical"></i> 2024年度员工体检须知
+                        </div>
+                        <div class="file-desc">
+                            包含体检项目说明、注意事项、体检流程、报告领取方式等详细信息，请务必仔细阅读。
+                        </div>
+                        <div class="file-meta">
+                            <span><i class="far fa-file-pdf"></i> PDF文档</span>
+                            <span><i class="far fa-calendar-alt"></i> 更新日期：2024-02-15</span>
+                            <span><i class="fas fa-download"></i> 下载次数：1,248</span>
+                        </div>
+                    </div>
+                    <a href="2024年度员工体检须知.pdf" class="download-btn" download>
+                        立即下载 <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+                
+                <!-- 文件2 -->
+                <div class="download-card">
+                    <div class="step-indicator">2</div>
+                    <div class="file-info">
+                        <div class="file-title">
+                            <i class="fas fa-calendar-check"></i> 2024年度体检预约指南（爱康）
+                        </div>
+                        <div class="file-desc">
+                            详细介绍通过爱康体检系统进行在线预约的操作步骤、时间选择、修改取消规则及常见问题解答。
+                        </div>
+                        <div class="file-meta">
+                            <span><i class="far fa-file-pdf"></i> PDF文档</span>
+                            <span><i class="far fa-calendar-alt"></i> 更新日期：2024-02-10</span>
+                            <span><i class="fas fa-download"></i> 下载次数：986</span>
+                        </div>
+                    </div>
+                    <a href="2024年度体检预约指南_爱康.pdf" class="download-btn" download>
+                        立即下载 <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 联系卡片 -->
+            <h2 style="color: var(--primary); margin: 50px 0 30px; display: flex; align-items: center;">
+                <i class="fas fa-headset" style="margin-right: 10px;"></i> 联系我们
+            </h2>
+            
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>体检预约</h3>
+                    <p>周一至周六 8:00-17:00</p>
+                    <a href="tel:0519-XXXXXXX" class="contact-link">
+                        0519-XXXXXXX <i class="fas fa-phone"></i>
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>体检中心地址</h3>
+                    <p>常州市新北区XXX路XX号<br>鼎武医院3号楼2层</p>
+                    <a href="https://map.baidu.com" target="_blank" class="contact-link">
+                        查看地图 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>电子邮箱</h3>
+                    <p>体检报告咨询/意见建议</p>
+                    <a href="mailto:tijian@dingwuhospital.com" class="contact-link">
+                        tijian@dingwuhospital.com <i class="fas fa-paper-plane"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-hospital"></i> 常州鼎武医院体检中心
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">体检套餐</a>
+                    <a href="#" class="footer-link">报告查询</a>
+                    <a href="#" class="footer-link">健康科普</a>
+                    <a href="#" class="footer-link">关于我们</a>
+                </div>
+                <div class="copyright">
+                    © 2024 常州鼎武医院体检中心 版权所有 | 苏ICP备XXXXXXXX号
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- 浮动帮助按钮 -->
+    <div class="help-button" onclick="alert('如需帮助，请拨打体检中心电话：0519-XXXXXXX')">
+        <i class="fas fa-question"></i>
+    </div>
+    
+    <script>
+        // 简单的下载计数动画（仅前端效果）
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const countElement = this.closest('.download-card').querySelector('.fa-download').parentNode;
+                let count = parseInt(countElement.textContent.replace(/\D/g, '')) || 0;
+                countElement.textContent = ` 下载次数：${++count.toLocaleString()}`;
+            });
+        });
+    </script>
+</body>
+</html>
